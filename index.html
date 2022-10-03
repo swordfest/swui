@@ -27,7 +27,7 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
     
         <title>SWUI Components</title>
     </head>
-<body x-cloak class="bg-[#ececec] dark:bg-[#141414]" x-data="{dropdown: true, component: 'dropdown'}">
+<body x-cloak class="bg-[#ececec] dark:bg-[#141414]" x-data="{dropdownTabActive: true, component: 'accordion'}" x-init="console.log(component)">
     <nav class="w-full h-20 fixed top-0 z-50 bg-white dark:bg-[#303030] ">
         <div class="container w-full h-full mx-auto flex items-center justify-between">
             <span class="font-black dark:text-white text-xl">SWORDFEST UI</span>
@@ -55,15 +55,16 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
     </nav>
     <main class="container h-screen grid grid-cols-12 auto-rows-auto mx-auto mt-24 mb-10 gap-6">
 
-        <div class="w-full h-fit col-span-3  flex flex-col p-4 bg-white rounded-lg">
-            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'dropdown'" x-bind:class="(component === 'dropdown') && 'before:content-['-']'">Dropdown</span>
-            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'inputText'">Input Text</span>
-            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none">Componente 3</span>
+        <div class="w-full h-fit col-span-2  flex flex-col p-4 bg-white dark:bg-[#303030] dark:text-white rounded-lg">
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 dark:hover:bg-[#1b1b1b] dark:active:bg-[#111111] rounded-md transition-colors font-medium cursor-pointer select-none before:content-[' ']" x-on:click="component = 'dropdown'" x-bind:class="component === 'dropdown' ? 'dark:bg-[#1b1b1b] bg-slate-100' : ''" x-init="console.log(component)">Dropdown</span>
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 dark:hover:bg-[#1b1b1b] dark:active:bg-[#111111] rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'inputText'" x-bind:class="component === 'inputText' ? 'dark:bg-[#1b1b1b] bg-slate-100' : ''" x-init="console.log(component)">Input Text</span>
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 dark:hover:bg-[#1b1b1b] dark:active:bg-[#111111] rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'accordion'" x-bind:class="component === 'accordion' ? 'dark:bg-[#1b1b1b] bg-slate-100' : ''">Accordion</span>
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 dark:hover:bg-[#1b1b1b] dark:active:bg-[#111111] rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'tabs'" x-bind:class="component === 'tabs' ? 'dark:bg-[#1b1b1b] bg-slate-100' : ''">Tabs</span>
         </div>
 
-        <div class="w-full bg-slate-200 h-auto col-span-9 flex flex-col items-center gap-6 pt-40">
+        <div class="w-full bg-[#e6e6e6] dark:bg-[#1b1b1b] h-auto col-span-10 flex flex-col items-center gap-6 pt-40 rounded-lg">
 
-            <div id="swui-input-dropdown" x-show="component === 'dropdown'" x-data="{items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'], lista: false, textComponent: 'Texto por defecto', recta: null, isMobile: false, isSelected: false, position: true }" x-on:click="lista = !lista, recta = $el.getBoundingClientRect(), (window.innerHeight - recta.bottom) < 256 ? position = false : position = true, window.innerWidth < 1024 ? isMobile = true : isMobile = false" x-bind:class="isMobile ? 'static' : 'relative'" x-on:click.outside="lista = false" class="w-56 h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:hover:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">            
+            <div id="swui-input-dropdown" x-show="component === 'dropdown'" x-data="{items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'], lista: false, textComponent: 'Texto por defecto', recta: null, isMobile: false, isSelected: false, position: true }" x-on:click="lista = !lista, recta = $el.getBoundingClientRect(), (window.innerHeight - recta.bottom) < 256 ? position = false : position = true, window.innerWidth < 1024 ? isMobile = true : isMobile = false" x-bind:class="isMobile ? 'static' : 'relative'" x-on:click.outside="lista = false" class="w-56 h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">            
                 <span class="w-auto" x-text="textComponent"></span>
                 <svg xmlns="http://ww.w3.org/2000/svg" class="" x-bind:class="lista ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24" style="fill: #6b7280;"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
 
@@ -72,7 +73,7 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
                         <template x-for="item in items">
                             <li class="hover:bg-blue-400 transition-colors group focus-within:bg-blue-400 flex items-center justify-between w-full h-10 p-2" x-on:click="textComponent = item, isSelected = true">
                                 <div class="flex gap-2">
-                                    <box-icon class="group-hover:fill-white" name='folder-open'></box-icon>
+                                    <box-icon class="group-hover:fill-white dark:fill-white" name='folder-open'></box-icon>
                                     <span class="group-hover:text-white" x-text="item"></span>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" x-show="textComponent == item" class="group-hover:fill-white fill-[#303030] dark:fill-[#cfcfcf]" width="24" height="24" viewBox="0 0 24 24"><path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path></svg>
@@ -83,8 +84,47 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
             </div>
 
             <div id="swui-input-textbox" x-show="component === 'inputText'">
-                <input placeholder="Escriba el texto" type="text" class="w-56 h-10 placeholder:text-[#cfcfcf] focus-within:placeholder:text-opacity-0 bg-white shadow-lg border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:hover:bg-[#3a3a3a] rounded-md flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030]">
+                <input placeholder="Escriba el texto" type="text" class="w-56 h-10 placeholder:text-[#636363] focus-within:placeholder:text-opacity-0 dark:bg-[#303030] shadow-lg border-0 focus:dark:outline-1  dark:hover:bg-[#3a3a3a] rounded-md flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030]">
             </div>
+
+            <div id="swui-accordion" class=" w-[640px] h-auto" x-data="{
+                items: [
+                {
+                    title: 'A, venenatis eget consequat rhoncus vitae, lobortis habitant.',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam eget dapibus blandit arcu non fringilla sed arcu faucibus. Arcu vitae, mattis tempor turpis. Felis, nulla tellus sed a commodo amet nisl consequat. Dui nisl, pharetra faucibus et aliquet tristique tellus sollicitudin dictum. Felis viverra pellentesque sed interdum mi fermentum sagittis. Libero odio vitae odio at aliquet augue duis. Et magna sit blandit facilisis turpis risus. Velit massa senectus egestas accumsan, vitae volutpat tortor in ipsum.'
+                }, 
+                {
+                    title: 'Enim id elementum facilisis at bibendum eu nibh.',
+                    description: 'Dictum cras sit ultrices praesent magna ornare arcu. Sed elit, aliquet consectetur eu mauris. At orci eu nibh adipiscing aenean. Imperdiet potenti sit aliquam, dolor diam ac sed vel. Morbi nunc eu morbi purus proin eu. Enim elit quis varius adipiscing. Adipiscing blandit sed nec, lobortis duis eu urna, dictumst tortor. Urna in egestas augue enim sed aliquet. Id mauris, blandit cras in adipiscing turpis. '
+                }, 
+                {
+                    title: 'Adipiscing nibh ipsum sapien, suspendisse vel integer placerat rhoncus.',
+                    description: 'Venenatis rhoncus egestas consequat ut sit vestibulum fames euismod. Sed lacus tellus malesuada bibendum lectus in venenatis. Non mi enim feugiat id in. Rhoncus at massa volutpat mollis. Feugiat ultricies dolor habitant imperdiet porta ultricies nulla velit. Ultricies elit elit vel viverra sed. Nunc eget viverra vel purus. Convallis sagittis leo est lectus nulla ut tellus. Euismod hac fermentum dignissim massa feugiat tincidunt et. Porttitor ipsum, mauris porta dui pulvinar tempor risus. Sed nisl at ornare risus eros, cursus. Ut ultricies pellentesque nunc, diam.'
+                },
+                {
+                    title: 'Tempus, mattis elementum, amet phasellus turpis egestas.',
+                    description: 'Nisi est varius velit velit. Malesuada in nunc sem fermentum tellus aenean. Eu leo id faucibus ullamcorper ut. Et iaculis laoreet tortor faucibus praesent faucibus venenatis. Semper faucibus risus, integer nisi, habitant urna urna, auctor parturient. Aliquet sit natoque est nec, erat gravida augue ut. Accumsan sodales adipiscing augue a posuere varius molestie.'
+                },
+                ],
+                active: false,
+                itemSelection: '',
+
+            }" x-show="component === 'accordion'">
+                <ul class=" w-auto flex flex-col gap-2 h-auto" >
+                    <template x-for="item in items">
+                        <li class="w-full flex flex-col gap-2">
+                            <div x-on:click="active = !active, itemSelection = item.title" class="w-auto h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">
+                                <span class="w-auto" x-text="item.title"></span>
+                                <svg xmlns="http://ww.w3.org/2000/svg" class="fill-[#303030] dark:fill-white" x-bind:class="(itemSelection == item.title) ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                            </div>
+                            <div class="w-full dark:text-[#cfcfcf] text-[#303030] dark:bg-[#3a3a3a] bg-white shadow-lg rounded-lg p-4 overflow-hidden" x-show="itemSelection == item.title">
+                                <p x-text="item.description" class="w-full"></p>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
 
         </div>
     </main>
