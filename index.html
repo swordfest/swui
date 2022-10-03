@@ -64,6 +64,7 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
 
         <div class="w-full bg-[#e6e6e6] dark:bg-[#1b1b1b] h-auto col-span-10 flex flex-col items-center gap-6 pt-40 rounded-lg">
 
+            <!-- Dropdown Component -->
             <div id="swui-input-dropdown" x-show="component === 'dropdown'" x-data="{items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'], lista: false, textComponent: 'Texto por defecto', recta: null, isMobile: false, isSelected: false, position: true }" x-on:click="lista = !lista, recta = $el.getBoundingClientRect(), (window.innerHeight - recta.bottom) < 256 ? position = false : position = true, window.innerWidth < 1024 ? isMobile = true : isMobile = false" x-bind:class="isMobile ? 'static' : 'relative'" x-on:click.outside="lista = false" class="w-56 h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">            
                 <span class="w-auto" x-text="textComponent"></span>
                 <svg xmlns="http://ww.w3.org/2000/svg" class="" x-bind:class="lista ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24" style="fill: #6b7280;"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
@@ -83,10 +84,12 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
                 </div>
             </div>
 
+            <!-- Text Box Component -->
             <div id="swui-input-textbox" x-show="component === 'inputText'">
                 <input placeholder="Escriba el texto" type="text" class="w-56 h-10 placeholder:text-[#636363] focus-within:placeholder:text-opacity-0 dark:bg-[#303030] shadow-lg border-0 focus:dark:outline-1  dark:hover:bg-[#3a3a3a] rounded-md flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030]">
             </div>
 
+            <!-- Accordion Component -->
             <div id="swui-accordion" class=" w-[640px] h-auto" x-data="{
                 items: [
                 {
@@ -107,18 +110,19 @@ $watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value
                 },
                 ],
                 active: false,
-                itemSelection: '',
+                itemSelection: null,
 
             }" x-show="component === 'accordion'">
                 <ul class=" w-auto flex flex-col gap-2 h-auto" >
                     <template x-for="item in items">
                         <li class="w-full flex flex-col gap-2">
-                            <div x-on:click="active = !active, itemSelection = item.title" class="w-auto h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">
+                            <div x-on:click="active = !active, itemSelection = items.indexOf(item)" class="w-auto h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">
                                 <span class="w-auto" x-text="item.title"></span>
-                                <svg xmlns="http://ww.w3.org/2000/svg" class="fill-[#303030] dark:fill-white" x-bind:class="(itemSelection == item.title) ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+                                <svg xmlns="http://ww.w3.org/2000/svg" class="fill-[#303030] dark:fill-white" x-bind:class="(itemSelection == items.indexOf(item)) ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
                             </div>
-                            <div class="w-full dark:text-[#cfcfcf] text-[#303030] dark:bg-[#3a3a3a] bg-white shadow-lg rounded-lg p-4 overflow-hidden" x-show="itemSelection == item.title">
+                            <div class="w-full dark:text-[#cfcfcf] text-[#303030] dark:bg-[#3a3a3a] bg-white shadow-lg rounded-lg p-4 overflow-hidden" x-show="itemSelection == items.indexOf(item)">
                                 <p x-text="item.description" class="w-full"></p>
+                                <span x-text="items.indexOf(item)"></span>
                             </div>
                         </li>
                     </template>
