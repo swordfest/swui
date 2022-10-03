@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ darkMode: JSON.parse(localStorage.getItem('darkMode')) }" x-init="
+
+
+$watch('darkMode', value=> localStorage.setItem('darkMode', JSON.stringify(value))) 
+
+" :class="{'dark': darkMode === true}">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/svg+xml" href="./imgs/logo.svg" sizes="any"/>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
+        <script defer src="https://unpkg.com/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        <!-- <script src="./others/alpine.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" /> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script> -->
+        <!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KQ4KMVJEXY"></script> -->
+        <!-- <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer=""></script> -->
+        <!-- <link type="text/css" rel="stylesheet" href="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.css"> -->
+        <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+    
+        <title>Shadowmere</title>
+    </head>
+<body x-cloak class="bg-[#ececec] dark:bg-[#141414]" x-data="{dropdown: true, component: 'dropdown'}">
+    <nav class="w-full h-20 fixed top-0 z-50 bg-white dark:bg-[#303030] ">
+        <div class="container w-full h-full mx-auto flex items-center justify-between">
+            <span class="font-black dark:text-white text-xl">SWORDFEST UI</span>
+            <button :value="darkMode" x-on:click="darkMode = !darkMode">
+                <div class="toggle-light dark:hidden w-auto h-auto rounded-md flex items-center justify-center cursor-pointer " x-show="!darkMode">
+                    <svg class="w-6 h-6 hover:rotate-[-15deg] transition-transform fill-[#303030] cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.2756 24C16.977 24 20.3575 22.316 22.5971 19.5566C22.9284 19.1484 22.5671 18.5521 22.0551 18.6496C16.2331 19.7584 10.8866 15.2945 10.8866 9.41738C10.8866 6.03197 12.6988 2.91886 15.6443 1.24266C16.0983 0.984281 15.9841 0.295922 15.4682 0.200625C14.745 0.0672624 14.0111 0.000109516 13.2756 0C6.65178 0 1.27563 5.3677 1.27563 12C1.27563 18.6239 6.64334 24 13.2756 24Z"/>
+                    </svg>
+                </div>
+                <div class="toggle-dark hidden dark:contents w-auto h-auto rounded-md flex items-center justify-center cursor-pointer " x-show="darkMode">
+                    <svg class="w-6 h-6 hover:rotate-[-30deg] transition-transform fill-[#303030] cursor-pointer" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_524_2311)">
+                    <path d="M12.75 7.5C10.2703 7.5 8.25 9.52031 8.25 12C8.25 14.4797 10.2703 16.5 12.75 16.5C15.2297 16.5 17.25 14.4797 17.25 12C17.25 9.52031 15.2297 7.5 12.75 7.5ZM24.3 11.2734L19.8609 9.05625L21.4313 4.35C21.6422 3.7125 21.0375 3.10781 20.4047 3.32344L15.6984 4.89375L13.4766 0.45C13.1766 -0.15 12.3234 -0.15 12.0234 0.45L9.80625 4.88906L5.09531 3.31875C4.45781 3.10781 3.85313 3.7125 4.06875 4.34531L5.63906 9.05156L1.2 11.2734C0.6 11.5734 0.6 12.4266 1.2 12.7266L5.63906 14.9437L4.06875 19.6547C3.85781 20.2922 4.4625 20.8969 5.09531 20.6813L9.80156 19.1109L12.0188 23.55C12.3188 24.15 13.1719 24.15 13.4719 23.55L15.6891 19.1109L20.3953 20.6813C21.0328 20.8922 21.6375 20.2875 21.4219 19.6547L19.8516 14.9484L24.2906 12.7313C24.9 12.4266 24.9 11.5734 24.3 11.2734ZM16.9922 16.2422C14.6531 18.5812 10.8469 18.5812 8.50781 16.2422C6.16875 13.9031 6.16875 10.0969 8.50781 7.75781C10.8469 5.41875 14.6531 5.41875 16.9922 7.75781C19.3313 10.0969 19.3313 13.9031 16.9922 16.2422Z" fill="#CFCFCF"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_524_2311">
+                    <rect width="24" height="24" fill="white" transform="translate(0.75)"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+                </div>
+            </button>
+            <span class="font-medium dark:text-white">Components</span>
+        </div>
+    </nav>
+    <main class="container h-screen grid grid-cols-12 auto-rows-auto mx-auto mt-24 mb-10 gap-6">
+
+        <div class="w-full h-fit col-span-3  flex flex-col p-4 bg-white rounded-lg">
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'dropdown'" x-bind:class="(component === 'dropdown') && 'before:content-['-']'">Dropdown</span>
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none" x-on:click="component = 'inputText'">Input Text</span>
+            <span class="w-full h-10 p-4 flex items-center hover:bg-slate-100 active:bg-slate-200 rounded-md transition-colors font-medium cursor-pointer select-none">Componente 3</span>
+        </div>
+
+        <div class="w-full bg-slate-200 h-auto col-span-9 flex flex-col items-center gap-6 pt-40">
+
+            <div id="swui-input-dropdown" x-show="component === 'dropdown'" x-data="{items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'], lista: false, textComponent: 'Texto por defecto', recta: null, isMobile: false, isSelected: false, position: true }" x-on:click="lista = !lista, recta = $el.getBoundingClientRect(), (window.innerHeight - recta.bottom) < 256 ? position = false : position = true, window.innerWidth < 1024 ? isMobile = true : isMobile = false" x-bind:class="isMobile ? 'static' : 'relative'" x-on:click.outside="lista = false" class="w-56 h-10 bg-white shadow-lg dark:border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:hover:bg-[#3a3a3a] rounded-md cursor-pointer flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030] select-none">            
+                <span class="w-auto" x-text="textComponent"></span>
+                <svg xmlns="http://ww.w3.org/2000/svg" class="" x-bind:class="lista ? 'rotate-180 transition-transform duration-300' : 'rotate-0 transition-transform duration-300'" width="24" height="24" viewBox="0 0 24 24" style="fill: #6b7280;"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+
+                <div class="absolute z-[160] w-full h-auto shadow-lg lg:h-auto overflow-hidden right-0 lg:rounded-md" role="dialog" x-bind:class="position ? 'top-0 lg:max-h-64 lg:top-11' : 'bottom-0 lg:max-h-64 lg:bottom-11'" x-show="lista" x-transition>
+                    <ul class="overflow-y-auto w-full h-full lg:h-auto right-0 bg-white dark:bg-[#303030] lg:rounded-md select-none snap-proximity">
+                        <template x-for="item in items">
+                            <li class="hover:bg-blue-400 transition-colors group focus-within:bg-blue-400 flex items-center justify-between w-full h-10 p-2" x-on:click="textComponent = item, isSelected = true">
+                                <div class="flex gap-2">
+                                    <box-icon class="group-hover:fill-white" name='folder-open'></box-icon>
+                                    <span class="group-hover:text-white" x-text="item"></span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" x-show="textComponent == item" class="group-hover:fill-white fill-[#303030] dark:fill-[#cfcfcf]" width="24" height="24" viewBox="0 0 24 24"><path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path></svg>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="swui-input-textbox" x-show="component === 'inputText'">
+                <input placeholder="Escriba el texto" type="text" class="w-56 h-10 placeholder:text-[#cfcfcf] focus-within:placeholder:text-opacity-0 bg-white shadow-lg border-0 focus:dark:outline-1 active:dark:bg-[#303030] dark:hover:bg-[#3a3a3a] rounded-md flex items-center justify-between p-2 pl-3 mx-2 font-medium dark:text-[#cfcfcf] text-[#303030]">
+            </div>
+
+        </div>
+    </main>
+                
+</body>
+</html>
